@@ -14,13 +14,15 @@ create table "field" (
     ,"name"       varchar(45) not null
 );
 
-drop table if exists "researcher_field" cacase;
+drop table if exists "researcher_field" cascade;
 create table "researcher_field" (
-     
+     "field_id"       bigint  not null
+    ,"researcher_id"  bigint  not null
+    ,constraint "no_duplicate_researcher_fields" unique ("field_id","researcher_id")      
 );
 
 drop table if exists "paper" cascade;
-create table "papers" (
+create table "paper" (
      "id"         bigserial   primary key
     ,"title"      varchar(45) not null
     ,"abstract"   text        not null
@@ -29,17 +31,19 @@ create table "papers" (
   
 drop table if exists "authorship" cascade;
 create table "authorship" (
-
+     "researcher_id" bigint  not null 
+    ,"paper_id"     bigint  not null
+    ,constraint "no_duplicate_authors" unique ("researcher_id","paper_id")
 );
 
 drop table if exists "paper_keywords" cascade;
 create table "keywords" (
      "id"         bigserial primary key
-     "keyword"    varchar   not null
+    ,"keyword"    varchar   not null
 );
 
 drop table if exists "researcher" cascade;
-create table "faculty" (
+create table "researcher" (
      "id"            bigserial   primary key
     ,"first_name"    varchar(45)  not null
     ,"last_name"     varchar(45)  not null
@@ -50,15 +54,17 @@ create table "faculty" (
 );
 
 drop table if exists "interest" cascade;
-create table "interest" (
+create table "interest" ( 
      "id"       bigserial   primary key
-    ,"field"    field_t     not null
+    ,"field"    varchar(45) not null
     ,"interest" varchar(45) not null
 );
 
 drop table if exists "researcher_interest" cascade;
 create table "researcher_interest" (
-   
+     "interest_id"   bigint  not null
+    ,"researcher_id" bigint  not null 
+    ,constraint "no_duplicate_research_interests" unique ("interest_id","researcher_id")
 );
 
 alter table "researcher_interest" add foreign key ("interest_id") references "interest" ("id");
