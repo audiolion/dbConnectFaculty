@@ -56,7 +56,7 @@ create table "researcher" (
 drop table if exists "interest" cascade;
 create table "interest" ( 
      "id"       bigserial   primary key
-    ,"field_id" varchar(45) not null
+    ,"field_id" bigint      not null
     ,"interest" varchar(45) not null
 );
 
