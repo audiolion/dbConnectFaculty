@@ -47,8 +47,8 @@ create table "researcher" (
      "id"            bigserial   primary key
     ,"first_name"    varchar(45)  not null
     ,"last_name"     varchar(45)  not null
-    ,"password_hash" bytea        default null
-    ,"password_salt" bytea        default null
+    ,"password_hash" varchar(40)  default null
+    ,"password_salt" varchar(40)  default null
     ,"email"         varchar(45)  not null
     ,"status"        status_t     not null
 );
