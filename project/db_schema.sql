@@ -17,9 +17,9 @@ create table "field" (
 drop table if exists "paper" cascade;
 create table "paper" (
      "id"         bigserial   primary key
-    ,"title"      varchar(45) not null
+    ,"title"      varchar     not null
     ,"abstract"   text        not null
-    ,"citation"   varchar(45) not null
+    ,"citation"   varchar     not null
 );
 
 drop table if exists "researcher" cascade;
