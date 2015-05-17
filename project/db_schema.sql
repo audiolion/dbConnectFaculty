@@ -65,7 +65,7 @@ drop table if exists "paper_keywords" cascade;
 create table "paper_keywords" (
      "paper_id"   bigint         not null
     ,"keyword"    varchar(45)    not null
-    ,constraint "no_duplicate_paper_keywords" unique ("paper_id", "keyword");
+    ,constraint "no_duplicate_paper_keywords" unique ("paper_id", "keyword")
 );
 
 alter table "researcher_interest" add foreign key ("researcher_id") references "researcher" ("id");
