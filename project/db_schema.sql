@@ -14,13 +14,6 @@ create table "field" (
     ,"name"       varchar(45) not null
 );
 
-drop table if exists "researcher_field" cascade;
-create table "researcher_field" (
-     "researcher_id"       bigint  not null
-    ,"field_id"  bigint  not null
-    ,constraint "no_duplicate_researcher_fields" unique ("researcher_id","field_id")      
-);
-
 drop table if exists "paper" cascade;
 create table "paper" (
      "id"         bigserial   primary key
@@ -28,23 +21,10 @@ create table "paper" (
     ,"abstract"   text        not null
     ,"citation"   varchar(45) not null
 );
-  
-drop table if exists "authorship" cascade;
-create table "authorship" (
-     "researcher_id" bigint  not null 
-    ,"paper_id"      bigint  not null
-    ,constraint "no_duplicate_authors" unique ("researcher_id","paper_id")
-);
-
-drop table if exists "paper_keywords" cascade;
-create table "paper_keywords" (
-     "id"         bigserial primary key
-    ,"keyword"    varchar   not null
-);
 
 drop table if exists "researcher" cascade;
 create table "researcher" (
-     "id"            bigserial   primary key
+     "id"            bigserial    primary key
     ,"first_name"    varchar(45)  not null
     ,"last_name"     varchar(45)  not null
     ,"password_hash" varchar(40)  default null
@@ -60,11 +40,32 @@ create table "interest" (
     ,"interest" varchar(45) not null
 );
 
+drop table if exists "authorship" cascade;
+create table "authorship" (
+     "researcher_id" bigint  not null 
+    ,"paper_id"      bigint  not null
+    ,constraint "no_duplicate_authors" unique ("researcher_id","paper_id")
+);
+
+drop table if exists "researcher_field" cascade;
+create table "researcher_field" (
+     "researcher_id"       bigint  not null
+    ,"field_id"  bigint  not null
+    ,constraint "no_duplicate_researcher_fields" unique ("researcher_id","field_id")      
+);
+
 drop table if exists "researcher_interest" cascade;
 create table "researcher_interest" (
      "researcher_id"   bigint  not null
     ,"interest_id" bigint  not null 
     ,constraint "no_duplicate_research_interests" unique ("researcher_id","interest_id")
+);
+
+drop table if exists "paper_keywords" cascade;
+create table "paper_keywords" (
+     "paper_id"   bigint    not null
+    ,"field_id"   bigint    not null
+    ,constraint "no_duplicate_paper_keywords" unique ("paper_id", "field_id");
 );
 
 alter table "researcher_interest" add foreign key ("researcher_id") references "researcher" ("id");
@@ -75,6 +76,9 @@ alter table "authorship" add foreign key ("paper_id") references "paper" ("id");
 
 alter table "researcher_field" add foreign key ("researcher_id") references "researcher" ("id");
 alter table "researcher_field" add foreign key ("field_id") references "field" ("id");
+
+alter table "paper_keywords" add foreign key ("paper_id") references "paper" ("id");
+alter table "paper_keywords" add foreign key ("field_id") references "field" ("id");
 
 alter table "interest" add foreign key ("field_id") references "field" ("id");
 
