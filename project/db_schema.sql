@@ -63,9 +63,9 @@ create table "researcher_interest" (
 
 drop table if exists "paper_keywords" cascade;
 create table "paper_keywords" (
-     "paper_id"   bigint    not null
-    ,"field_id"   bigint    not null
-    ,constraint "no_duplicate_paper_keywords" unique ("paper_id", "field_id");
+     "paper_id"   bigint         not null
+    ,"keyword"    varchar(45)    not null
+    ,constraint "no_duplicate_paper_keywords" unique ("paper_id", "keyword");
 );
 
 alter table "researcher_interest" add foreign key ("researcher_id") references "researcher" ("id");
@@ -78,7 +78,6 @@ alter table "researcher_field" add foreign key ("researcher_id") references "res
 alter table "researcher_field" add foreign key ("field_id") references "field" ("id");
 
 alter table "paper_keywords" add foreign key ("paper_id") references "paper" ("id");
-alter table "paper_keywords" add foreign key ("field_id") references "field" ("id");
 
 alter table "interest" add foreign key ("field_id") references "field" ("id");
 
