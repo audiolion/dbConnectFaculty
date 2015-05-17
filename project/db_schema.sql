@@ -62,13 +62,13 @@ create table "interest" (
 
 drop table if exists "researcher_interest" cascade;
 create table "researcher_interest" (
-     "interest_id"   bigint  not null
-    ,"researcher_id" bigint  not null 
-    ,constraint "no_duplicate_research_interests" unique ("interest_id","researcher_id")
+     "researcher_id"   bigint  not null
+    ,"interest_id" bigint  not null 
+    ,constraint "no_duplicate_research_interests" unique ("researcher_id","interest_id")
 );
 
-alter table "researcher_interest" add foreign key ("interest_id") references "interest" ("id");
 alter table "researcher_interest" add foreign key ("researcher_id") references "researcher" ("id");
+alter table "researcher_interest" add foreign key ("interest_id") references "interest" ("id");
 
 alter table "authorship" add foreign key ("researcher_id") references "researcher" ("id");
 alter table "authorship" add foreign key ("paper_id") references "paper" ("id");
