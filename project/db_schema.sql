@@ -32,7 +32,7 @@ create table "paper" (
 drop table if exists "authorship" cascade;
 create table "authorship" (
      "researcher_id" bigint  not null 
-    ,"paper_id"     bigint  not null
+    ,"paper_id"      bigint  not null
     ,constraint "no_duplicate_authors" unique ("researcher_id","paper_id")
 );
 
@@ -56,7 +56,7 @@ create table "researcher" (
 drop table if exists "interest" cascade;
 create table "interest" ( 
      "id"       bigserial   primary key
-    ,"field"    varchar(45) not null
+    ,"field_id" varchar(45) not null
     ,"interest" varchar(45) not null
 );
 
@@ -75,6 +75,8 @@ alter table "authorship" add foreign key ("paper_id") references "paper" ("id");
 
 alter table "researcher_field" add foreign key ("field_id") references "field" ("id");
 alter table "researcher_field" add foreign key ("researcher_id") references "researcher" ("id");
+
+alter table "interest" add foreign key ("field_id") references "field" ("id");
 
 create index "interest_id_index" on "interest" ("id");
 
