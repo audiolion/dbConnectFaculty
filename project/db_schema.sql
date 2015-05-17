@@ -37,7 +37,7 @@ create table "authorship" (
 );
 
 drop table if exists "paper_keywords" cascade;
-create table "keywords" (
+create table "paper_keywords" (
      "id"         bigserial primary key
     ,"keyword"    varchar   not null
 );
