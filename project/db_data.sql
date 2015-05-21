@@ -1,7 +1,7 @@
 insert into researcher (id, first_name, last_name, password_hash, email, status) values
     (1,'Steve','Zilora','5f47859188a602594556580532e814a3','sjz@it.rit.edu', 'faculty'),
     (2,'Dan','Bogaard','f4f6172eb26581952a70d7199bfd2ddb','dsb@it.rit.edu', 'faculty'),
-    (3,'Ryan','Castner','3100ca123fab8197d3ee4b692ef10ab0','rrc9704@rit.edu','undergraduate');
+    (3,'Ryan','Castner','8c05f0c9bf241144bbb7b0b20269b46f','rrc9704@rit.edu','undergraduate');
 
     
 insert into field (id, name) values
